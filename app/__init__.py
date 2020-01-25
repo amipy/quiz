@@ -9,3 +9,7 @@ def hello():
 @app.route("/who")
 def who():
 	return "Alex did"
+	
+@app.route("/")
+def home():
+	return "Please go to an actual address."
