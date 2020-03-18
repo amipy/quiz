@@ -17,15 +17,24 @@ def index():
 def new():
     signup_form = signup.SignupForm()
     if signup_form.validate_on_submit():
-        new_user = user.User(
-            first_name=signup_form.first_name.data,
-            last_name=signup_form.last_name.data,
-            email=signup_form.email.data,
-            password=signup_form.password.data
-        )
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect("/users")
+        email = signup_form.email.data
+        searchAt = email.split("@")
+        if len(searchAt[0]) > 0:
+            if len(searchAt) == 2:
+                if len(searchAt[1]) > 0:
+                    searchDot = searchAt[1].split(".")
+                    if len(searchDot) > 0:
+                        if len(searchDot[len(searchDot) - 1]) > 0:
+                            new_user = user.User(
+                                first_name=signup_form.first_name.data,
+                                last_name=signup_form.last_name.data,
+                                email=signup_form.email.data,
+                                password=signup_form.password.data
+                            )
+                            db.session.add(new_user)
+                            db.session.commit()
+                            return redirect("/users")
+        return render_template("users/problem.html", warning="Email is invalid.")
     return render_template("users/new.html", form=signup_form)
 
 
