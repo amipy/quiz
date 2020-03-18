@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>User list</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+             <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+             </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('new')}}">New user</a>
+        <a href="{{ url_for('remove_user')}}">Remove user</a>
+    </body>
+</html>
